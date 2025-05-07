@@ -3,5 +3,7 @@ from second import views
 from django.contrib import admin
 
 urlpatterns = [
-    path('helloworld/', views.helloworld)
+    path('home/', views.helloWorld),
+    path('user/<int:id>/', views.userById),
+    path('all-users/', views.allUsers),
 ]
