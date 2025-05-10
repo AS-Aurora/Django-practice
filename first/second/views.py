@@ -32,14 +32,19 @@ def userById(request, id):
     validId = False
     for data in dummyData:
         if data['id'] == id:
-            validId = True
-            html += f"""
-            <hr>
-            <h1>{data['name']}</h1>
-            <p>City: {data['city']}</p>
-            <hr>
-            """
-            break
+            return render(request, 'second/user_profile.html', {
+                'name': data['name'],
+                'city': data['city'],
+            })
+    return HttpResponseNotFound("User not found")
+            # validId = True
+            # html += f"""
+            # <hr>
+            # <h1>{data['name']}</h1>
+            # <p>City: {data['city']}</p>
+            # <hr>
+            # """
+            # break
     # if not validId:
     #     return HttpResponseNotFound("User not found")
     # return HttpResponse(html)
@@ -49,16 +54,17 @@ def redirectToUser(request, id):
     return HttpResponseRedirect(url)
 
 def allUsers(request):
-    html = "<h1>User Detais: </h1>"
-    for data in dummyData:
-        html += f"""
-        <h2>{data['name']}</h2>
-        <p>City: {data['city']}</p>
-        <a href="/second/all-users/redirect-to-{data['id']}" target="_blank">Visit their profile</a>
+        return render(request, 'second/all_users.html', {
+            'users': dummyData,
+        })
 
-        <hr>
-        """
-    return HttpResponse(html)
+        # html += f"""
+        # <h2>{data['name']}</h2>
+        # <p>City: {data['city']}</p>
+        # <a href="/second/all-users/redirect-to-{data['id']}" target="_blank">Visit their profile</a>
+
+        # <hr>
+        # """
 
 # def redirectToGoogle(request, id):
 #     return HttpResponseRedirect(f"/second/user/{id}/")
