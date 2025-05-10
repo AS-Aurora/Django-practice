@@ -8,10 +8,13 @@
 <body>
     <h1>All Users</h1>
     {% for user in users %}
-    <h2>{{user.name}}</h2>
+    <h2>{{user.name|capfirst|truncatechars:7}}</h2>
     <h2>{{user.city}}</h2>
-    <a href="{% url 'user-profile' user.id %}" target="_blank">Visit profile</a>
+    <p>{{user.description|capfirst|truncatewords:7}}</p>
+    <a href="{% url 'user-profile' user.id %}">Visit profile</a>
     <hr>
+    {% empty %}
+    <h2>No data available</h2>
     {% endfor %}
 </body>
 </html>
